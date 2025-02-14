@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazón Animado con Contador</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlazar el archivo CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body onclick="PlayAudio()">
+    <!-- Contenedor del contador de tiempo -->
+    <div class="time">
+        <div class="time-box">
+            <span id="dias">00</span>
+            <span>Días</span>
+        </div>
+        <div class="time-box">
+            <span id="horas">00</span>
+            <span>Horas</span>
+        </div>
+        <div class="time-box">
+            <span id="minutos">00</span>
+            <span>Minutos</span>
+        </div>
+        <div class="time-box">
+            <span id="segundos">00</span>
+            <span>Segundos</span>
+        </div>
+    </div>
+
+    <!-- Corazón animado -->
+    <div class="heart"></div>
+
+    <!-- Botón -->
+    <a href="https://www.canva.com/design/DAGfEaieCMU/ayM6JASIYdVacS-1GXLYMg/view?utm_content=DAGfEaieCMU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=haf46a92575"
+        class="btn btn-1">PULSAME</a>
+
+    <!-- Sonido de latidos de corazón -->
+    <audio id="heartbeat" loop>
+        <source src="latido.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <!-- Texto romántico -->
+    <h1 class="romantic-text">Para ti, con todo mi amor</h1>
+
+    <script>
+        // Función para reproducir el audio
+        function PlayAudio() {
+            document.getElementById("heartbeat").play();
+        }
+
+        // Contador de tiempo transcurrido
+        const fechaObjetivo = new Date('2024-09-11T00:00:00');
+
+        function actualizarContador() {
+            const ahora = new Date();
+            const diferencia = ahora - fechaObjetivo;
+
+            // Calcular días, horas, minutos y segundos
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            // Actualizar los valores en los cuadros
+            document.getElementById('dias').textContent = String(dias).padStart(2, '0');
+            document.getElementById('horas').textContent = String(horas).padStart(2, '0');
+            document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
+            document.getElementById('segundos').textContent = String(segundos).padStart(2, '0');
+        }
+
+        // Actualizar el contador cada segundo
+        setInterval(actualizarContador, 1000);
+
+        // Ejecutar la función una vez al cargar la página
+        actualizarContador();
+    </script>
+
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #5a3a3a; /* Color de texto suave */
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Contenedor del contador de tiempo */
+        .time {
+            display: flex;
+            gap: 1.5vw; /* Espacio entre los cuadros (relativo al ancho de la ventana) */
+            padding: 1.5vh 3vw; /* Padding relativo al alto y ancho de la ventana */
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            z-index: 2;
+            margin-bottom: 25vh; /* Margen inferior relativo al alto de la ventana */
+        }
+
+        /* Estilos para cada cuadro de tiempo */
+        .time-box {
+            text-align: center;
+            background: rgba(255, 182, 193, 0.8); /* Fondo rosa pastel */
+            padding: 1.5vh 1.5vw; /* Padding relativo al alto y ancho de la ventana */
+            border-radius: 10px;
+            min-width: 8vw; /* Ancho mínimo relativo al ancho de la ventana */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .time-box span {
+            display: block;
+        }
+
+        .time-box span:first-child {
+            font-size: 2.5vw; /* Tamaño de fuente relativo al ancho de la ventana */
+            font-weight: bold;
+            color: #5a3a3a; /* Color de texto suave */
+        }
+
+        .time-box span:last-child {
+            font-size: 1.2vw; /* Tamaño de fuente relativo al ancho de la ventana */
+            color: rgba(90, 58, 58, 0.8); /* Color de texto suave */
+        }
+
+        /* Estilos para el botón */
+        .btn {
+            padding: 1.5vh 3vw; /* Padding relativo al alto y ancho de la ventana */
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 0.8vw; /* Espaciado relativo al ancho de la ventana */
+            text-indent: 0.8vw; /* Sangría relativa al ancho de la ventana */
+            z-index: 2;
+            transition: all 0.4s ease;
+            background: #ff6b81; /* Fondo rosa suave */
+            border: none;
+            border-radius: 20px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+            margin-top: 15vh; /* Margen superior relativo al alto de la ventana */
+            font-size: 1.5vw; /* Tamaño de fuente relativo al ancho de la ventana */
+        }
+
+        .btn-1 {
+            overflow: hidden;
+        }
+
+        .btn-1::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            left: 0;
+            top: -200%;
+            background-color: #ff4757; /* Fondo rosa más intenso */
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-1:hover:before {
+            top: 0;
+            border-radius: 0%;
+        }
+
+        /* Estilos para el texto romántico */
+        .romantic-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4vw; /* Tamaño de fuente relativo al ancho de la ventana */
+            color: #eed7da; /* Color rosa suave */
+            text-align: center;
+            z-index: 2;
+            padding: 1vh 2vw; /* Padding relativo al alto y ancho de la ventana */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: all 0.3s ease; /* Transición suave */
+            margin-top: vh; /* Margen superior relativo al alto de la ventana */
+        }
+
+        .romantic-text:hover {
+            transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+        }
+
+        /* Media queries para ajustes en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .time-box span:first-child {
+                font-size: 4vw; /* Tamaño de fuente más grande en pantallas pequeñas */
+            }
+
+            .time-box span:last-child {
+                font-size: 2.5vw; /* Tamaño de fuente más grande en pantallas pequeñas */
+            }
+
+            .romantic-text {
+                font-size: 6vw; /* Tamaño de fuente más grande en pantallas pequeñas */
+            }
+
+            .btn {
+                font-size: 3vw; /* Tamaño de fuente más grande en pantallas pequeñas */
+            }
+        }
+    </style>
+</body>
+
+</html>

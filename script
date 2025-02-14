@@ -1,0 +1,30 @@
+// Función para reproducir el audio
+function PlayAudio() {
+    document.getElementById("heartbeat").play();
+}
+
+// Contador de tiempo transcurrido
+const fechaObjetivo = new Date('2024-09-11T00:00:00');
+
+function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = ahora - fechaObjetivo;
+
+    // Calcular días, horas, minutos y segundos
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    // Actualizar los valores en los cuadros
+    document.getElementById('dias').textContent = String(dias).padStart(2, '0');
+    document.getElementById('horas').textContent = String(horas).padStart(2, '0');
+    document.getElementById('minutos').textContent = String(minutos).padStart(2, '0');
+    document.getElementById('segundos').textContent = String(segundos).padStart(2, '0');
+}
+
+// Actualizar el contador cada segundo
+setInterval(actualizarContador, 1000);
+
+// Ejecutar la función una vez al cargar la página
+actualizarContador();
